@@ -38,8 +38,8 @@ var game = {
         if (game.counter === 0) {
             console.log("time is up");
             // alert("Time is up");
-            clearInterval(this.countdown);
-            this.done();
+            // clearInterval(this.countdown);
+            // this.done();
         }
     },
     start: function () {
@@ -52,7 +52,12 @@ var game = {
                 $("#subwrapper").append("<input type='radio' name='question-" + i + "' value='" + questions[i].choices[j] + "'>'" + questions[i].choices[j])
             }
         };
-        $("#subwrapper").append("<br><button id='end'>DONE</button> ")
+        $("#subwrapper").append("<br><button id='end'>DONE</button> ");
+        if ($("#end").data("clicked")) {
+            this.result();
+        } else if ($("#end").data("clicked")) {
+            this.result();
+        }
     },
     done: function(){
         $.each($("input[name = 'question-0]':checked"),function(){
@@ -96,15 +101,18 @@ var game = {
             }
         });
 
-        this.result();
+        // this.result();
     },
 
     result: function(){
         clearInterval(timer);
+        this.done;
         $("#subwrapper h2").remove();
         $("#subwrapper").html("<h2>All Done</h2>");
         $("#subwrapper").append("<h3>Correct Answers: " + this.correct + "</h3>");
         $("#subwrapper").append("<h3>Incorrect Answers: " + this.incorrect + "</h3>");
         $("#subwrapper").append("<h3>Unanswered: " + (questions.length-(this.incorrect+this.correct))  + "</h3>");
-    }
+    },
+
+    
 }
